@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Detail - Jeff Donovan Photography</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="portfolio-detail.css">
+</head>
+<body class="portfolio-detail-body">
+  <!-- Header -->
+  <header class="scrolled">
+    <div class="header-container">
+      <a href="index.html#portfolio" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+          <circle cx="12" cy="13" r="3"/>
+        </svg>
+        <span>JEFFREY DONOVAN</span>
+      </a>
+      
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#portfolio">Projects</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <button class="menu-btn" onclick="toggleMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html" onclick="toggleMenu()">Home</a>
+      <a href="index.html#portfolio" onclick="toggleMenu()">Projects</a>
+      <a href="index.html#about" onclick="toggleMenu()">About</a>
+      <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
+    </div>
+  </header>
+
+  <!-- Portfolio Detail Section -->
+  <section class="portfolio-detail-section">
+    <div class="container">
+      <a href="index.html#portfolio" class="back-link">← Back to Projects</a>
+      
+      <h1 class="portfolio-detail-title" id="portfolio-title">Loading...</h1>
+      <p class="portfolio-detail-description" id="portfolio-description"></p>
+      
+      <div class="portfolio-grid" id="portfolio-grid">
+        <!-- Images will be loaded dynamically via JavaScript -->
+      </div>
+      
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="#" class="back-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">↑ Return to Top</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Modal -->
+  <div id="image-modal" class="image-modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    
+    <!-- Navigation zones covering left and right thirds -->
+    <div class="modal-nav-zone modal-nav-zone-prev" onclick="event.stopPropagation(); navigateImage(-1)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </div>
+    <div class="modal-nav-zone modal-nav-zone-next" onclick="event.stopPropagation(); navigateImage(1)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </div>
+    
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <img id="modal-image" src="" alt="">
+      <div class="modal-info">
+        <h3 id="modal-title"></h3>
+        <p id="modal-teaser"></p>
+        <p id="modal-detail"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="dark-footer">
+    <p>&copy; 2026 Jeff Donovan Photography. All rights reserved.</p>
+  </footer>
+
+  <script src="portfolio-data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Load portfolio details based on URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const portfolioId = urlParams.get('portfolio');
+    let currentImageIndex = 0;
+    let currentPortfolio = null;
+    
+    if (portfolioId && portfolioData[portfolioId]) {
+      const portfolio = portfolioData[portfolioId];
+      currentPortfolio = portfolio;
+      
+      // Set page title
+      document.title = `${portfolio.title} - Jeff Donovan Photography`;
+      
+      // Set portfolio title and description
+      document.getElementById('portfolio-title').textContent = portfolio.title;
+      document.getElementById('portfolio-description').textContent = portfolio.fullDescription || portfolio.description;
+      
+      // Load images
+      const grid = document.getElementById('portfolio-grid');
+      portfolio.images.forEach((image, index) => {
+        const card = document.createElement('div');
+        card.className = 'portfolio-card';
+        card.onclick = () => openModal(image, index);
+        
+        const img = document.createElement('img');
+        img.src = 'http://www.jeffdonovan.net' + image.medium_file;
+        img.alt = image.name || `${portfolio.title} ${index + 1}`;
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'portfolio-card-overlay';
+        
+        if (image.name) {
+          const title = document.createElement('h4');
+          title.className = 'card-title';
+          title.textContent = image.name;
+          overlay.appendChild(title);
+        }
+        
+        if (image.teaser) {
+          const teaser = document.createElement('p');
+          teaser.className = 'card-teaser';
+          teaser.textContent = image.teaser;
+          overlay.appendChild(teaser);
+        }
+        
+        card.appendChild(img);
+        card.appendChild(overlay);
+        grid.appendChild(card);
+      });
+    } else {
+      document.getElementById('portfolio-title').textContent = 'Portfolio Not Found';
+      document.getElementById('portfolio-description').textContent = 'The requested portfolio could not be found.';
+    }
+    
+    // Modal functions
+    function openModal(image, index) {
+      currentImageIndex = index;
+      updateModalContent();
+      const modal = document.getElementById('image-modal');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      
+      // Initialize swipe functionality
+      initializeSwipe();
+    }
+    
+    function updateModalContent() {
+      if (!currentPortfolio || !currentPortfolio.images[currentImageIndex]) return;
+      
+      const image = currentPortfolio.images[currentImageIndex];
+      document.getElementById('modal-image').src = 'http://www.jeffdonovan.net' + image.large_file;
+      document.getElementById('modal-title').textContent = image.name || '';
+      document.getElementById('modal-teaser').textContent = (image.location ? image.location + ', ' + image.date : '');
+      document.getElementById('modal-detail').textContent = image.text || '';
+    }
+    
+    function navigateImage(direction) {
+      if (!currentPortfolio) return;
+      
+      currentImageIndex += direction;
+      
+      // Wrap around if at the beginning or end
+      if (currentImageIndex < 0) {
+        currentImageIndex = currentPortfolio.images.length - 1;
+      } else if (currentImageIndex >= currentPortfolio.images.length) {
+        currentImageIndex = 0;
+      }
+      
+      updateModalContent();
+    }
+    
+    function closeModal() {
+      const modal = document.getElementById('image-modal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      
+      // Remove swipe listeners
+      removeSwipeListeners();
+    }
+    
+    // Touch/Swipe functionality for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    
+    function handleTouchStart(e) {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }
+    
+    function handleTouchEnd(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipe();
+    }
+    
+    function handleSwipe() {
+      const swipeThreshold = 50; // Minimum distance for swipe
+      const swipeXDistance = touchEndX - touchStartX;
+      const swipeYDistance = touchEndY - touchStartY;
+      const absSwipeXDistance = Math.abs(swipeXDistance);
+      const absSwipeYDistance = Math.abs(swipeYDistance);
+      
+      // Check if it's a vertical swipe (for navigation between images)
+      if (absSwipeYDistance > swipeThreshold && absSwipeYDistance > absSwipeXDistance) {
+        if (swipeYDistance < 0) {
+          // Swipe up - go to next image
+          navigateImage(1);
+        } else if (swipeYDistance > 0) {
+          // Swipe down - go to previous image
+          navigateImage(-1);
+        }
+      }
+      // Check if it's a horizontal swipe (for closing modal)
+      else if (absSwipeXDistance > swipeThreshold && absSwipeXDistance > absSwipeYDistance) {
+        // Any horizontal swipe closes the modal
+        closeModal();
+      }
+    }
+    
+    function initializeSwipe() {
+      const modal = document.getElementById('image-modal');
+      modal.addEventListener('touchstart', handleTouchStart, { passive: true });
+      modal.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
+    
+    function removeSwipeListeners() {
+      const modal = document.getElementById('image-modal');
+      modal.removeEventListener('touchstart', handleTouchStart);
+      modal.removeEventListener('touchend', handleTouchEnd);
+    }
+    
+    // Close modal on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === 'ArrowLeft') {
+        navigateImage(-1);
+      } else if (e.key === 'ArrowRight') {
+        navigateImage(1);
+      }
+    });
+  </script>
+</body>
+</html>

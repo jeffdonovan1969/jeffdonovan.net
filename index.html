@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Jeff Donovan Photography - Travel & Cultural Photography</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="keywords" content="Jeff Donovan,Jeffrey Donovan,Jeff Donovan photography,travel photography, visual anthropology,prints for sale,fine art,links to travel resources,bolivia,chile,peru,easter island,Aymara,Tibet,Rapa Nui,Philadelphia,American Photographer,American Photography">
+  <meta name="description" content="This site is a showcase for the creative photography of Jeff Donovan. Jeff is a freelance photographer currently residing in Philadelphia.">
+  <meta name="author" content="jeffdonovan@jeffdonovan.net">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jeff Donovan Photography"/>
+  <meta property="og:url" content="http://www.jeffdonovan.net/mainLayout.php?contentIndex=Home"/>
+  <meta property="og:image" content="http://www.jeffdonovan.net/photos/aymara/Aymara0173-001c.jpg"/>
+  <meta property="og:image" content="http://www.jeffdonovan.net/photos/aymara/Aymara165c.jpg"/>
+  <meta property="og:description" content="This site is a showcase for the creative photography of Jeff Donovan. Jeff is a freelance photographer currently residing in the Philadelphia area."/>
+  <meta property="og:site_name" content="Jeff Donovan Photography">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jeff Donovan Photography">
+  <meta name="twitter:description" content="This site is a showcase for the creative photography of Jeff Donovan. Jeff is a freelance photographer currently residing in the Philadelphia area.">
+  <meta name="twitter:image" content="http://www.jeffdonovan.net/photos/aymara/Aymara0173-001c.jpg">
+  
+  <!-- Favicon (you'll need to add actual favicon files) -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="http://www.jeffdonovan.net/">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="#portfolio" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+          <circle cx="12" cy="13" r="3"/>
+        </svg>
+        <span>JEFFREY DONOVAN</span>
+      </a>
+      
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#portfolio">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="menu-btn" onclick="toggleMenu()">
+        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#home" onclick="toggleMenu()">Home</a>
+      <a href="#portfolio" onclick="toggleMenu()">Projects</a>
+      <a href="#about" onclick="toggleMenu()">About</a>
+      <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero" data-hero-images='["http://www.jeffdonovan.net/photos/xlg/JED-2005-0073.jpg", "http://www.jeffdonovan.net/photos/xlg/JED-2006-0216.jpg", "http://www.jeffdonovan.net/photos/xlg/JED-2012-0015-001.jpg", "http://www.jeffdonovan.net/photos/xlg/JED-2012-0496-001.jpg", "http://www.jeffdonovan.net/photos/xlg/JED-2003-0035-001.jpg"]'></section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="portfolio">
+    <div class="container">
+      <h2 class="section-title section-title-with-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+          <circle cx="12" cy="13" r="3"/>
+        </svg>
+        <span>Projects</span>
+      </h2>
+      
+      <div class="category-cards">
+        <div class="category-card" data-portfolio="peru" data-images='["http://www.jeffdonovan.net/photos/md/JED-2005-0073.jpg", "http://www.jeffdonovan.net/photos/md/JED-2011-0134 001.jpg", "http://www.jeffdonovan.net/photos/md/JED-2011-0129 002.jpg", "http://www.jeffdonovan.net/photos/md/JED-2011-0158-001.jpg"]'>
+          <div class="category-image"></div>
+          <div class="category-overlay">
+            <h3 class="category-title">Tawantinsuyu</h3>
+            <p class="category-description">The Inca Empire legacy</p>
+            <a href="portfolio-detail.html?portfolio=peru" class="category-link">View Gallery →</a>
+          </div>
+        </div>
+        
+        <div class="category-card" data-portfolio="tibet" data-images='["http://www.jeffdonovan.net/photos/md/JED-2006-0177.jpg", "http://www.jeffdonovan.net/photos/md/JED-2006-0161.jpg", "http://www.jeffdonovan.net/photos/md/JED-2006-0216.jpg", "http://www.jeffdonovan.net/photos/md/JED-2011-0294 001.jpg"]'>
+          <div class="category-image"></div>
+          <div class="category-overlay">
+            <h3 class="category-title">Return of the Snow Lion</h3>
+            <p class="category-description">Tibetan landscapes and culture</p>
+            <a href="portfolio-detail.html?portfolio=tibet" class="category-link">View Gallery →</a>
+          </div>
+        </div>
+        
+        <div class="category-card" data-portfolio="rapa-nui" data-images='["http://www.jeffdonovan.net/photos/md/JED-2003-0011-001.jpg", "http://www.jeffdonovan.net/photos/md/JED-2003-0016-001.jpg", "http://www.jeffdonovan.net/photos/md/JED-2003-0017-001.jpg", "http://www.jeffdonovan.net/photos/md/JED-2003-0014-001.jpg"]'>
+          <div class="category-image"></div>
+          <div class="category-overlay">
+            <h3 class="category-title">Rapa Nui, The Navel of the World</h3>
+            <p class="category-description">Journey to Easter Island</p>
+            <a href="portfolio-detail.html?portfolio=rapa-nui" class="category-link">View Gallery →</a>
+          </div>
+        </div>
+        
+        <div class="category-card" data-portfolio="japan" data-images='["http://www.jeffdonovan.net/photos/md/JED-2012-0015-001.jpg", "http://www.jeffdonovan.net/photos/md/JED-2012-0294-001.jpg", "http://www.jeffdonovan.net/photos/md/JED-2012-0052-001.jpg", "http://www.jeffdonovan.net/photos/md/JED-2012-0261-002.jpg", "http://www.jeffdonovan.net/photos/md/JED-2012-0027-002.jpg", "http://www.jeffdonovan.net/photos/md/JED-2012-0045-003.jpg"]'>
+          <div class="category-image"></div>
+          <div class="category-overlay">
+            <h3 class="category-title">Traditional Japan</h3>
+            <p class="category-description">Ancient customs and beauty</p>
+            <a href="portfolio-detail.html?portfolio=japan" class="category-link">View Gallery →</a>
+          </div>
+        </div>
+        
+        <div class="category-card" data-portfolio="vessels" data-images='["http://www.jeffdonovan.net/photos/md/JED-2010-0046-2.jpg", "http://www.jeffdonovan.net/photos/md/JED-2010-0152.jpg", "http://www.jeffdonovan.net/photos/md/JED-2010-0117.jpg", "http://www.jeffdonovan.net/photos/md/JED-2010-0179.jpg"]'>
+          <div class="category-image"></div>
+          <div class="category-overlay">
+            <h3 class="category-title">Vessels Of Life</h3>
+            <p class="category-description">Stories in stillness</p>
+            <a href="portfolio-detail.html?portfolio=vessels" class="category-link">View Gallery →</a>
+          </div>
+        </div>
+        
+        <div class="category-card" data-portfolio="philadelphia" data-images='["http://www.jeffdonovan.net/photos/md/JED-PHIL-0001.jpg", "http://www.jeffdonovan.net/photos/md/JED-PHIL-0040-1.jpg", "http://www.jeffdonovan.net/photos/md/JED-PHIL-0008.jpg", "http://www.jeffdonovan.net/photos/md/JED-PHIL-0011.jpg"]'>
+          <div class="category-image"></div>
+          <div class="category-overlay">
+            <h3 class="category-title">The City of Brotherly Love</h3>
+            <p class="category-description">Philadelphia's vibrant spirit</p>
+            <a href="portfolio-detail.html?portfolio=philadelphia" class="category-link">View Gallery →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="about-content">
+      <h2 class="section-title section-title-with-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+          <circle cx="12" cy="13" r="3"/>
+        </svg>
+        <span>About</span>
+      </h2>
+      <p class="main">My projects explore the spiritual dialogue that exists between indigenous cultures and the landscapes they inhabit. In all, I have photographed on five continents and in over 21 countries. My long term projects have taken me to the Andes (Bolivia, Peru, and Chile) and the Himalayas (Tibet, Nepal, and India) in search of the people, their unique cultural traditions, and the landscapes that inspire them.</p>
+<p class="main">What drives me most is the opportunity to learn from other people. Every journey begins with curiosity and a deep respect for the communities I encounter. Whether sharing a meal with a family in a remote Tibetan village or witnessing ancient ceremonies on Easter Island, I have found that the camera opens doors to meaningful connections that transcend language and cultural barriers.</p>
+<p class="main">Through these experiences, I have come to understand that photography is not just about capturing images—it is about listening, observing, and honoring the stories that people share. The wisdom held within indigenous traditions offers profound lessons about our relationship with the land, with each other, and with ourselves. My work seeks to preserve and celebrate these perspectives in a rapidly changing world.</p>
+<p class="main">I graduated from the University of Delaware in 1995 with a master's degree in electrical engineering (MSEE) with an emphasis in digital image and signal processing. Inspired by the urban landscapes of Philadelphia, my passion for photography began while attending continuing education classes at the University of the Arts in Philadelphia. Driven by a keen curiosity about what is going on in the world, I have been using the camera and the photo essay as a means of expression ever since.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="contact-content">
+      <h2 class="section-title section-title-with-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+          <circle cx="12" cy="13" r="3"/>
+        </svg>
+        <span>Get In Touch</span>
+      </h2>
+      <p>Ready to book a session or have questions? Let's connect.</p>
+      
+      <div class="social-links">
+        <a href="/cdn-cgi/l/email-protection#f9939c9f9f9d9697968f9897b9939c9f9f9d9697968f9897d7979c8d">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+        </a>
+        <a href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Jeff Donovan Photography. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
