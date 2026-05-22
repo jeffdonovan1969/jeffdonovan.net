@@ -4,20 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio Detail - Jeff Donovan Photography</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="portfolio-detail.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 </head>
 <body class="portfolio-detail-body">
   <!-- Header -->
   <header class="scrolled">
     <div class="header-container">
-      <a href="index.html#portfolio" class="logo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-          <circle cx="12" cy="13" r="3"/>
-        </svg>
-        <span>JEFFREY DONOVAN</span>
-      </a>
+      <a href="index.html#portfolio" class="logo">Jeffrey Donovan</a>
       
       <nav>
         <a href="index.html">Home</a>
@@ -50,7 +50,22 @@
       
       <h1 class="portfolio-detail-title" id="portfolio-title">Loading...</h1>
       <p class="portfolio-detail-description" id="portfolio-description"></p>
-      
+
+      <!-- Expanding Full Description -->
+      <div class="read-more-container" id="read-more-container" style="display:none;">
+        <button class="read-more-btn" id="read-more-btn" onclick="toggleReadMore()">
+          → Read More
+        </button>
+        <div class="read-more-content" id="read-more-content">
+          <div class="read-more-inner">
+            <div id="full-description-text"></div>
+            <a href="#" class="read-more-close" onclick="toggleReadMore(); return false;">
+              ↑ Close
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="portfolio-grid" id="portfolio-grid">
         <!-- Images will be loaded dynamically via JavaScript -->
       </div>
@@ -78,9 +93,12 @@
     </div>
     
     <div class="modal-content" onclick="event.stopPropagation()">
-      <img id="modal-image" src="" alt="">
-      <div class="modal-info">
+      <div class="modal-image-panel">
+        <img id="modal-image" src="" alt="">
+      </div>
+      <div class="modal-info" id="modal-info">
         <h3 id="modal-title"></h3>
+        <p class="modal-attribution">Jeffrey Donovan (American, b. 1969)</p>
         <p id="modal-teaser"></p>
         <p id="modal-detail"></p>
       </div>
@@ -92,8 +110,9 @@
     <p>&copy; 2026 Jeff Donovan Photography. All rights reserved.</p>
   </footer>
 
-  <script src="portfolio-data.js"></script>
-  <script src="script.js"></script>
+  <!--script src="portfolio-data.js"></script>
+  <script src="script.js"></script-->
+  <script src="portfolio-detail-dynamic.js"></script>
   <script>
     // Load portfolio details based on URL parameter
     const urlParams = new URLSearchParams(window.location.search);

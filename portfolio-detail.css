@@ -1,110 +1,199 @@
-/* Portfolio Detail Page Styles */
+/* ── Passport overlay on portfolio-detail page ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('passPortBackground-inverted.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.10;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── Portfolio Detail Page — Gallery Wall Theme ── */
+/* Full-width bar via ::before — dropdown transparent below */
+header.scrolled {
+  background-color: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+}
+
+header.scrolled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(60, 40, 20, 0.65);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  z-index: -1;
+}
+
+header.scrolled .mobile-menu.active {
+  background-color: transparent;
+  backdrop-filter: none;
+  position: relative;
+  z-index: 1;
+}
 .portfolio-detail-body {
-  background-color: #1a1a1a;
-  color: white;
+  /* Same warm plaster wall as the modal */
+  background-color: #e8e2da;
+  background-image:
+    repeating-linear-gradient(
+      91deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 55px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(0,0,0,0.025) 0px,
+      rgba(0,0,0,0.025) 1px,
+      transparent 1px,
+      transparent 38px
+    );
+  color: #1e140a;
+  min-height: 100vh;
+}
+
+/* Vignette on the page too */
+.portfolio-detail-body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.28) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .portfolio-detail-section {
   min-height: calc(100vh - 70px);
   padding: 6rem 2rem 4rem;
+  position: relative;
+  z-index: 1;
 }
 
 .back-link {
   display: inline-block;
-  color: white;
+  color: #2a1e12;
   text-decoration: none;
   margin-bottom: 2rem;
-  font-size: 1.125rem;
-  transition: color 0.3s;
+  font-size: 1rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  transition: opacity 0.3s;
 }
 
 .back-link:hover {
-  color: #a3a3a3;
+  opacity: 1;
 }
 
+/* Page title — like a gallery exhibition title on the wall */
 .portfolio-detail-title {
+  font-family: Georgia, 'Times New Roman', serif;
   font-size: 3rem;
-  font-weight: 300;
-  margin-bottom: 1rem;
-  color: #FFFACD;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: #1a0f05;
   text-align: center;
 }
 
+/* Subtitle / short description */
 .portfolio-detail-description {
-  font-size: 1.25rem;
-  color: #a3a3a3;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #5a4020;
   margin-bottom: 4rem;
   text-align: center;
+  letter-spacing: 0.02em;
 }
 
+/* ── Thumbnail grid — photos hanging on the wall ── */
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 3rem;
   max-width: 1400px;
   margin: 0 auto;
 }
 
 .portfolio-card {
   position: relative;
-  background-color: #2a2a2a;
-  border: 3px solid white;
-  border-radius: 4px;
-  overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 300px;
+  min-height: 280px;
 }
 
 .portfolio-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.1);
-  border-color: #FFFACD;
+  transform: translateY(-6px) scale(1.01);
 }
 
+/* Card images get the same framed treatment as the modal */
 .portfolio-card img {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.3s;
+  transition: box-shadow 0.4s ease;
+  /* White matte */
+  border: 12px solid #f2ece0;
+  box-shadow:
+    0 0 0 1px #6b4f2a,
+    0 0 0 2px #6b4f2a,
+    0 0 0 12px #1e130a,
+    8px 14px 34px rgba(0,0,0,0.45),
+    2px 4px 8px rgba(0,0,0,0.3);
 }
 
 .portfolio-card:hover img {
-  transform: scale(1.05);
+  box-shadow:
+    0 0 0 1px #6b4f2a,
+    0 0 0 2px #6b4f2a,
+    0 0 0 12px #1e130a,
+    14px 22px 48px rgba(0,0,0,0.55),
+    3px 6px 12px rgba(0,0,0,0.35);
 }
 
+/* Hide overlay label beneath thumbnail images on detail page */
 .portfolio-card-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
-  padding: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.portfolio-card:hover .portfolio-card-overlay {
-  opacity: 1;
+  display: none;
 }
 
 .card-title {
-  color: white;
-  font-size: 1.25rem;
-  font-weight: 300;
-  margin-bottom: 0.5rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #1a0f05;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
 }
 
 .card-teaser {
-  color: #d4d4d4;
-  font-size: 0.9rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #7a5530;
+  font-size: 0.72rem;
+  font-style: italic;
+  letter-spacing: 0.03em;
   margin: 0;
 }
 
-/* Image Modal */
+/* ── Image Modal — Gallery Wall ── */
 .image-modal {
   display: none;
   position: fixed;
@@ -113,29 +202,57 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
+  /* Warm gallery wall — linen/plaster tone with subtle texture */
+  background-color: #e8e2da;
+  background-image:
+    repeating-linear-gradient(
+      91deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 55px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(0,0,0,0.025) 0px,
+      rgba(0,0,0,0.025) 1px,
+      transparent 1px,
+      transparent 38px
+    );
   align-items: center;
   justify-content: center;
-  padding: 2rem;
 }
+
+/* Vignette — draws eye to the artwork */
+.image-modal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.42) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 
 .modal-close {
   position: absolute;
-  top: 2rem;
-  right: 3rem;
-  color: white;
-  font-size: 3rem;
-  font-weight: 300;
+  top: 1.25rem;
+  right: 1.75rem;
+  color: #2a1e12;
+  font-size: 1.75rem;
+  font-weight: 400;
   cursor: pointer;
   z-index: 2002;
-  transition: color 0.3s;
+  transition: opacity 0.2s;
+  line-height: 1;
+  opacity: 0.45;
 }
 
 .modal-close:hover {
-  color: #a3a3a3;
+  opacity: 0.9;
 }
 
-/* Navigation zones - covers left and right 20% of modal */
+/* Navigation zones */
 .modal-nav-zone {
   position: absolute;
   top: 0;
@@ -152,103 +269,387 @@
 }
 
 .modal-nav-zone:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.07);
 }
 
-.modal-nav-zone-prev {
-  left: 0;
-}
+.modal-nav-zone-prev { left: 0; }
+.modal-nav-zone-next { right: 0; }
 
-.modal-nav-zone-next {
-  right: 0;
-}
-
+/* Scene container — full viewport, transparent, lays frame + label side-by-side */
 .modal-content {
   display: flex;
-  gap: 3rem;
-  max-width: 1400px;
-  max-height: 90vh;
-  background-color: #1a1a1a;
-  padding: 2rem;
-  border-radius: 8px;
-  border: 2px solid white;
-  position: relative;
-  z-index: 2000;
+  flex-direction: row;
   align-items: center;
+  gap: 3.5rem;
+  width: 92vw;
+  height: 92vh;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  position: relative;
+  z-index: 2001;
+  overflow: visible;
+  padding: 2rem 3rem;
+  box-sizing: border-box;
+}
+
+/* ── Framed photograph ── */
+.modal-image-panel {
+  flex: 0 0 62%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  background: transparent;
+  /* Padding absorbs the box-shadow frame so the image itself shrinks to fit */
+  padding: 3rem;
+  box-sizing: border-box;
 }
 
 .modal-content img {
-  max-width: 60%;
-  max-height: 80vh;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  border: 2px solid white;
-  margin: auto;
   display: block;
+  /* Layered framing using border + box-shadow rings (all participate in layout) */
+  /* White matte board — directly on the image */
+  border: 20px solid #f2ece0;
+  box-shadow:
+    0 0 0 1px #6b4f2a,              /* inner gold fillet (matte edge) */
+    0 0 0 2px #6b4f2a,              /* outer gold fillet (frame edge) */
+    0 0 0 18px #1e130a,             /* dark walnut frame */
+    14px 22px 52px rgba(0,0,0,0.62),/* deep wall shadow */
+    3px 5px 10px rgba(0,0,0,0.38); /* base contact shadow */
 }
 
+/* ── Museum label / comment card ── */
 .modal-info {
   flex: 1;
   overflow-y: auto;
-  color: white;
+  /* Aged card stock */
+  background-color: #faf7f2;
+  background-image: linear-gradient(160deg, #fefcf8 0%, #f5ede0 100%);
+  color: #1e140a;
+  padding: 1.75rem 1.75rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  /* Thin dark border with left accent bar */
+  border-left: 5px solid #1e130a;
+  border-top: 1px solid rgba(0,0,0,0.15);
+  border-right: 1px solid rgba(0,0,0,0.15);
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+  box-shadow:
+    4px 8px 22px rgba(0,0,0,0.28),
+    1px 2px 4px rgba(0,0,0,0.18);
+  max-height: 52%;
+  align-self: center;
+  border-radius: 12px;
+}
+
+/* Gold rule at top of label — like a real museum card */
+.modal-info::before {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background-color: #8a6030;
+  margin-bottom: 0.9rem;
+  flex-shrink: 0;
 }
 
 .modal-info h3 {
-  font-size: 2rem;
-  font-weight: 300;
-  margin-bottom: 1rem;
-  color: #FFFACD;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  color: #100a04;
+  flex-shrink: 0;
 }
 
-.modal-info p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #d4d4d4;
-  margin-bottom: 1rem;
+/* Location / date — small caps style */
+.modal-info p:nth-of-type(1) {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7a5530;
+  margin-bottom: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* Attribution line — "Artist Name (Nationality, b. year)" */
+.modal-attribution {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: #5a4020;
+  margin-bottom: 0.85rem !important;
+  font-style: normal !important;
+  text-transform: none !important;
+}
+
+/* Body description — italic, as per gallery labels */
+.modal-info p:nth-of-type(2) {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #2e2010;
+  font-style: italic;
+  margin-bottom: 0;
 }
 
 .dark-footer {
-  background-color: #0a0a0a;
-  border-top: 1px solid #333;
-  color: #a3a3a3;
+  background-color: rgba(60, 40, 20, 0.92);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f2ece0;
+  position: relative;
+  z-index: 1;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
+  /* Tablet: stack frame above label */
   .modal-content {
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
+    gap: 1.5rem;
+    width: 96vw;
+    height: 96vh;
+    padding: 2rem 1.5rem 1.5rem;
   }
-  
-  .modal-content img {
-    max-width: 100%;
-    max-height: 50vh;
-  }
-  
-  .modal-info {
+
+  .modal-image-panel {
+    flex: 0 0 58%;
     width: 100%;
+  }
+
+  .modal-info {
+    max-height: 36%;
+    width: 100%;
+    padding: 1.25rem 1.25rem 1rem;
   }
 }
 
 @media (max-width: 768px) {
   .portfolio-grid {
     grid-template-columns: 1fr;
+    gap: 4rem; /* extra room for the overlay label beneath cards */
   }
-  
+
   .portfolio-detail-title {
     font-size: 2rem;
+    letter-spacing: 0.05em;
   }
-  
+
   .portfolio-detail-section {
     padding: 5rem 1rem 3rem;
   }
-  
-  .modal-close {
-    right: 1rem;
-    top: 1rem;
+
+  /* Mobile / iPhone — full screen gallery wall */
+  .modal-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;             /* more breathing room between image and label card */
+    width: 100vw;
+    height: 100vh;
+    padding: 3rem 1.5rem 1.5rem; /* more inset from all edges of the window */
   }
-  
-  .image-modal {
-    padding: 1rem;
+
+  .modal-image-panel {
+    flex: 0 0 55%;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Shrink frame on small screens */
+  .modal-content img {
+    width: 100%;
+    max-height: 100%;
+    height: auto;
+    border-width: 12px;
+    box-shadow:
+      0 0 0 1px #6b4f2a,
+      0 0 0 2px #6b4f2a,
+      0 0 0 12px #1e130a,
+      8px 14px 30px rgba(0,0,0,0.6),
+      2px 3px 6px rgba(0,0,0,0.35);
+  }
+
+  /* Card matches image width exactly */
+  .modal-info {
+    max-height: 38%;
+    width: 100%;
+    padding: 1.25rem 1.5rem; /* slightly more internal padding on the label card */
+    box-sizing: border-box;
+  }
+
+  .modal-info h3 {
+    font-size: 0.9rem;
+  }
+
+  .modal-info p:nth-of-type(1) {
+    font-size: 0.65rem;
+  }
+
+  .modal-info p:nth-of-type(2) {
+    font-size: 0.8rem;
+  }
+
+  .modal-close {
+    top: 0.6rem;
+    right: 0.75rem;
+    font-size: 1.5rem;
+  }
+}
+
+/* ── Gallery walk — full scene slide animation ── */
+@keyframes galleryWalkRight {
+  from { transform: translateX(120px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+@keyframes galleryWalkLeft {
+  from { transform: translateX(-120px); opacity: 0; }
+  to   { transform: translateX(0);      opacity: 1; }
+}
+
+/* Applied to the entire .modal-content scene */
+.modal-content.walk-in-right {
+  animation: galleryWalkRight 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-content.walk-in-left {
+  animation: galleryWalkLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Read More / Full Description — gallery wall placard ── */
+.read-more-container {
+  max-width: 720px;
+  margin: 0 auto 4rem;
+  text-align: center;
+  position: relative;
+}
+
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #2a1e12;
+  font-size: 0.85rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  text-decoration: none;
+  opacity: 0.55;
+}
+
+.read-more-btn:hover {
+  opacity: 1;
+}
+
+/* Animated expand panel */
+.read-more-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease-in-out;
+  text-align: left;
+  width: 100%;
+}
+
+.read-more-content.open {
+  grid-template-rows: 1fr;
+}
+
+/* Inner wrapper needed for grid animation trick */
+.read-more-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Expanded text styled as a museum wall placard */
+.read-more-content #full-description-text {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: #2e2010;
+  font-style: italic;
+  margin-top: 1.25rem;
+  padding: 1.75rem 2rem;
+  background: linear-gradient(160deg, #ffffff 0%, #faf4ea 100%);
+  border-left: 5px solid #1e130a;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  border-right: 1px solid rgba(0,0,0,0.12);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 4px 6px 18px rgba(0,0,0,0.2);
+  border-radius: 12px;
+}
+
+.read-more-content #full-description-text p {
+  margin-bottom: 1rem;
+  line-height: 1.85;
+}
+
+.read-more-content #full-description-text p:last-child {
+  margin-bottom: 0;
+}
+
+.read-more-content #full-description-text p.main {
+  font-size: 0.95rem;
+  color: #2e2010;
+}
+
+.read-more-close {
+  display: inline-block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2a1e12;
+  text-decoration: none;
+  margin-top: 1.25rem;
+  transition: opacity 0.3s;
+  float: right;
+  opacity: 0.5;
+  font-style: normal;
+}
+
+.read-more-close:hover {
+  opacity: 1;
+}
+
+/* Clearfix */
+.read-more-inner::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+@media (max-width: 768px) {
+  .read-more-content #full-description-text {
+    padding: 1.25rem 1rem;
+    font-size: 0.88rem;
   }
 }

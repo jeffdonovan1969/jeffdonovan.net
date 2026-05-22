@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Diagnostic Tool</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 { color: #2563eb; }
+    h2 { color: #334155; margin-top: 30px; }
+    .test-section {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border-left: 4px solid #2563eb;
+    }
+    .success { border-left-color: #10b981; }
+    .error { border-left-color: #ef4444; }
+    .warning { border-left-color: #f59e0b; }
+    pre {
+      background: #1e293b;
+      color: #f1f5f9;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 12px;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+    button:hover { background: #1e40af; }
+    .info { background: #eff6ff; padding: 10px; border-radius: 4px; margin: 10px 0; }
+    code { background: #e2e8f0; padding: 2px 6px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>🔍 API Diagnostic Tool</h1>
+  <p>This tool will help you figure out why the admin is getting HTML instead of JSON.</p>
+
+  <div class="info">
+    <strong>Current Page URL:</strong> <code id="current-url"></code><br>
+    <strong>Detected Folder:</strong> <code id="detected-folder"></code>
+  </div>
+
+  <div class="test-section">
+    <h2>Step 1: Configure Your API Path</h2>
+    <p>Enter the folder where your files are located:</p>
+    <input type="text" id="api-path" placeholder="/newSite" style="padding: 8px; width: 300px; font-size: 14px;">
+    <button onclick="saveApiPath()">Set Path</button>
+    <p style="color: #64748b; font-size: 14px;">
+      Examples: Leave empty for root, or enter <code>/newSite</code> if in a subdirectory
+    </p>
+  </div>
+
+  <div class="test-section">
+    <h2>Step 2: Test API Endpoints</h2>
+    <button onclick="testEndpoint('api-portfolios.php', 'portfolios')">Test Portfolios API</button>
+    <button onclick="testEndpoint('api-images.php?limit=5', 'images')">Test Images API</button>
+    <button onclick="testEndpoint('test-minimal.php', 'minimal')">Test Minimal Setup</button>
+    <button onclick="testEndpoint('test-api.php', 'test')">Test Full Diagnostic</button>
+    <div id="test-results"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>Step 3: View Response Details</h2>
+    <div id="response-details"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>Step 4: Fix Instructions</h2>
+    <div id="fix-instructions"></div>
+  </div>
+
+  <script>
+    let API_BASE = '';
+    
+    // Detect current folder
+    window.onload = function() {
+      const currentUrl = window.location.href;
+      const path = window.location.pathname;
+      const folder = path.substring(0, path.lastIndexOf('/'));
+      
+      document.getElementById('current-url').textContent = currentUrl;
+      document.getElementById('detected-folder').textContent = folder || '/ (root)';
+      document.getElementById('api-path').value = folder;
+      API_BASE = folder;
+    };
+    
+    function saveApiPath() {
+      API_BASE = document.getElementById('api-path').value;
+      alert('API path set to: ' + (API_BASE || '/ (root)'));
+    }
+    
+    async function testEndpoint(endpoint, name) {
+      const resultsDiv = document.getElementById('test-results');
+      const detailsDiv = document.getElementById('response-details');
+      const fixDiv = document.getElementById('fix-instructions');
+      
+      resultsDiv.innerHTML = '<p>Testing ' + endpoint + '...</p>';
+      
+      const fullUrl = API_BASE + '/' + endpoint;
+      
+      try {
+        const response = await fetch(fullUrl);
+        const contentType = response.headers.get('content-type');
+        const status = response.status;
+        const statusText = response.statusText;
+        
+        // Get response text
+        const text = await response.text();
+        
+        // Try to parse as JSON
+        let isJson = false;
+        let jsonData = null;
+        try {
+          jsonData = JSON.parse(text);
+          isJson = true;
+        } catch(e) {
+          isJson = false;
+        }
+        
+        // Display results
+        let resultClass = isJson ? 'success' : 'error';
+        let resultHtml = '<div class="test-section ' + resultClass + '">';
+        resultHtml += '<h3>Test Results: ' + endpoint + '</h3>';
+        resultHtml += '<p><strong>URL Tested:</strong> <code>' + fullUrl + '</code></p>';
+        resultHtml += '<p><strong>Status:</strong> ' + status + ' ' + statusText + '</p>';
+        resultHtml += '<p><strong>Content-Type:</strong> ' + (contentType || 'Not set') + '</p>';
+        resultHtml += '<p><strong>Is JSON?</strong> ' + (isJson ? '✅ YES' : '❌ NO') + '</p>';
+        
+        if (isJson) {
+          resultHtml += '<p style="color: #10b981;">✅ <strong>SUCCESS!</strong> API is working correctly.</p>';
+        } else {
+          resultHtml += '<p style="color: #ef4444;">❌ <strong>PROBLEM!</strong> API returned HTML instead of JSON.</p>';
+        }
+        
+        resultHtml += '</div>';
+        resultsDiv.innerHTML = resultHtml;
+        
+        // Show response
+        detailsDiv.innerHTML = '<h3>Response Content:</h3><pre>' + escapeHtml(text.substring(0, 2000)) + (text.length > 2000 ? '\n\n... (truncated)' : '') + '</pre>';
+        
+        // Show fix instructions
+        if (!isJson) {
+          showFixInstructions(text, fullUrl);
+        } else {
+          fixDiv.innerHTML = '<div class="test-section success"><h3>✅ All Good!</h3><p>This endpoint is working correctly. If admin.html still has errors, check that API_BASE is set correctly in admin-script.js</p></div>';
+        }
+        
+      } catch (error) {
+        resultsDiv.innerHTML = '<div class="test-section error"><h3>❌ Error Testing ' + endpoint + '</h3><p><strong>URL:</strong> ' + fullUrl + '</p><p><strong>Error:</strong> ' + error.message + '</p></div>';
+        detailsDiv.innerHTML = '<p>Could not fetch the endpoint. This usually means:</p><ul><li>File does not exist at that location</li><li>Wrong API_BASE path</li><li>CORS issue</li></ul>';
+      }
+    }
+    
+    function showFixInstructions(responseText, url) {
+      const fixDiv = document.getElementById('fix-instructions');
+      let instructions = '<div class="test-section warning"><h3>🔧 How to Fix</h3>';
+      
+      // Check for common issues
+      if (responseText.includes('<!DOCTYPE')) {
+        instructions += '<p><strong>Issue:</strong> The API is returning an HTML page.</p>';
+        
+        if (responseText.includes('404') || responseText.includes('Not Found')) {
+          instructions += '<h4>❌ Problem: File Not Found (404)</h4>';
+          instructions += '<p>The file does not exist at <code>' + url + '</code></p>';
+          instructions += '<h4>Solutions:</h4><ol>';
+          instructions += '<li>Check that you uploaded <code>api-portfolios.php</code> to the correct folder</li>';
+          instructions += '<li>Verify the API_BASE path above matches your folder structure</li>';
+          instructions += '<li>Check filename is exactly <code>api-portfolios.php</code> (not .html or .txt)</li>';
+          instructions += '</ol>';
+        } 
+        else if (responseText.includes('Parse error') || responseText.includes('syntax error')) {
+          instructions += '<h4>❌ Problem: PHP Syntax Error</h4>';
+          instructions += '<p>There is a syntax error in your PHP file.</p>';
+          instructions += '<h4>Solutions:</h4><ol>';
+          instructions += '<li>Re-download and upload the file (might have gotten corrupted)</li>';
+          instructions += '<li>Check PHP error logs for details</li>';
+          instructions += '<li>Make sure you didn\'t accidentally edit the PHP file</li>';
+          instructions += '</ol>';
+        }
+        else if (responseText.includes('Access denied') || responseText.includes('Connection failed')) {
+          instructions += '<h4>❌ Problem: Database Connection Failed</h4>';
+          instructions += '<p>Cannot connect to the database.</p>';
+          instructions += '<h4>Solutions:</h4><ol>';
+          instructions += '<li>Open <code>config.php</code></li>';
+          instructions += '<li>Update DB_USER to your MySQL username</li>';
+          instructions += '<li>Update DB_PASS to your MySQL password</li>';
+          instructions += '<li>Update DB_NAME to your database name (currently: jeffdon1_WPNSV)</li>';
+          instructions += '<li>Save and re-upload config.php</li>';
+          instructions += '</ol>';
+        }
+        else if (responseText.includes('failed to open stream')) {
+          instructions += '<h4>❌ Problem: Missing Files</h4>';
+          instructions += '<p>PHP file is trying to include another file that doesn\'t exist.</p>';
+          instructions += '<h4>Solutions:</h4><ol>';
+          instructions += '<li>Make sure <code>config.php</code> is uploaded</li>';
+          instructions += '<li>All files should be in the same folder</li>';
+          instructions += '<li>Check file permissions (should be 644 for .php files)</li>';
+          instructions += '</ol>';
+        }
+        else {
+          instructions += '<h4>❌ Problem: Unknown PHP Error</h4>';
+          instructions += '<p>The PHP file is returning an error page.</p>';
+          instructions += '<h4>Solutions:</h4><ol>';
+          instructions += '<li>Check the response content above for clues</li>';
+          instructions += '<li>Check your hosting control panel error logs</li>';
+          instructions += '<li>Make sure all files are uploaded</li>';
+          instructions += '<li>Try uploading <code>test-api.php</code> and visit it directly</li>';
+          instructions += '</ol>';
+        }
+      }
+      
+      instructions += '</div>';
+      fixDiv.innerHTML = instructions;
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
