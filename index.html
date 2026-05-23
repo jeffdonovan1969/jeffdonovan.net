@@ -153,10 +153,10 @@
         <div class="about-image">
           <img src="JeffDonovanPortrait.jpg" alt="Jeff Donovan Portrait">
         </div>
-        <p class="main">I've always been drawn to the spiritual dialogue between people who live close to the Earth and the landscapes they inhabit. My work explores indigenous cultures and the traditions that connect them to the land—from the high plateaus of the Andes to the remote valleys of the Himalayas.</p>
-        <p class="main">I'm always driven by the opportunity to learn from others. Every journey begins with curiosity and deep respect for the communities I encounter. Whether sharing a meal with a family in a remote Tibetan village or witnessing ancient ceremonies on Easter Island, the camera opens doors to meaningful connections that transcend language and cultural barriers.</p>
-        <p class="main">Through these experiences, I've come to understand that photography isn't just about capturing images—it's about listening, observing, and honoring the stories people share. The wisdom within indigenous traditions offers profound lessons about our relationship with the land, with each other, and with ourselves. My work seeks to preserve and celebrate these perspectives in a rapidly changing world.</p>
-        <p class="main">I hold a master's degree in electrical engineering from the University of Delaware, with an emphasis in digital image and signal processing. My passion for photography began in Philadelphia, where continuing education classes at the University of the Arts sparked a creative awakening. Since then, driven by curiosity about our world, I've used the camera and photo essay as my means of exploration and expression.</p>
+        <p class="main">I choose as subjects people who maintain a spiritual dialogue with the natural world &mdash; people who live close to the Earth and the landscapes they inhabit. My work explores indigenous cultures and the traditions that connect them to the land&mdash;from the high plateaus of the Andes to the remote valleys of the Himalayas.</p>
+        <p class="main">Every journey begins with curiosity and deep respect for the history and traditions of the communities I encounter. Driven by the opportunity to learn from others, I immerse myself in the places and people I photograph. Whether sharing a meal with a family in a remote Tibetan village or witnessing ancient ceremonies on Easter Island, the camera opens doors to meaningful connections that transcend language and cultural barriers.</p>
+        <p class="main">Through these experiences, I&rsquo;ve come to understand that photography isn&rsquo;t just about capturing images&mdash;it&rsquo;s about listening, observing, and honoring the stories people share. The wisdom within tradition offers profound lessons about our relationship with the land, with each other, and with ourselves. My work seeks to understand, preserve, and celebrate these perspectives in a rapidly changing world.</p>
+        <p class="main">I have a master&rsquo;s degree in electrical engineering from the University of Delaware, with an emphasis in digital image and signal processing. My passion for photography began in Philadelphia, where wondering among the urban landscapes sparked a creative awakening. Since then, driven by curiosity about our world, I&rsquo;ve used the camera and photo essay as my means of exploration and expression.</p>
       </div>
 
     </div>
@@ -177,44 +177,101 @@
 
       <div class="contact-layout">
 
-        <!-- Business Card -->
-        <div class="contact-business-card">
-          <div class="business-card-bg"></div>
-          <div class="business-card-overlay"></div>
-          <div class="business-card-content">
-            <div class="business-card-top">
-              <h3 class="business-card-name">Jeffrey Donovan</h3>
-              <p class="business-card-subtitle">Travel &amp; Cultural Photography</p>
-            </div>
-            <div class="business-card-bottom">
-              <div class="business-card-social">
-                <a href="mailto:jeffdonovan@jeffdonovan.net" title="Email">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(242,236,224,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="4" width="20" height="16" rx="2"/>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                  </svg>
-                </a>
-                <a href="#" title="Instagram">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <defs>
-                      <linearGradient id="ig-grad2" x1="0%" y1="100%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="rgba(240,148,51,0.75)"/>
-                        <stop offset="100%" stop-color="rgba(188,24,136,0.75)"/>
-                      </linearGradient>
-                    </defs>
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-grad2)"/>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-grad2)"/>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-grad2)"/>
-                  </svg>
-                </a>
-                <a href="#" title="Facebook">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(100,160,242,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                  </svg>
-                </a>
+        <!-- Business Card (4-face carousel) -->
+        <div class="contact-business-card" id="business-card">
+          <div class="card-inner" id="card-inner">
+
+            <!-- Face 1: JED-2005-0062 -->
+            <div class="card-face" id="card-face-0">
+              <div class="business-card-bg" style="background-image:url('http://www.jeffdonovan.net/photos/xlg/JED-2005-0062.jpg')"></div>
+              <div class="business-card-overlay"></div>
+              <div class="business-card-content">
+                <div class="business-card-top">
+                  <h3 class="business-card-name">Jeffrey Donovan</h3>
+                  <p class="business-card-subtitle">Travel &amp; Cultural Photography</p>
+                </div>
+                <div class="business-card-bottom">
+                  <div class="business-card-social">
+                    <a href="mailto:jeffdonovan@jeffdonovan.net" title="Email" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(242,236,224,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                    <a href="#" title="Instagram" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="ig-g1" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(240,148,51,0.75)"/><stop offset="100%" stop-color="rgba(188,24,136,0.75)"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-g1)"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-g1)"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-g1)"/></svg>
+                    </a>
+                    <a href="#" title="Facebook" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(100,160,242,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                  </div>
+                  <a href="mailto:jeffdonovan@jeffdonovan.net" class="business-card-email" onclick="event.stopPropagation()">jeffdonovan@jeffdonovan.net</a>
+                </div>
               </div>
-              <a href="mailto:jeffdonovan@jeffdonovan.net" class="business-card-email">jeffdonovan@jeffdonovan.net</a>
-            </div><!-- end .business-card-bottom -->
+            </div>
+
+            <!-- Face 2: JED-2006-0177 -->
+            <div class="card-face" id="card-face-1" style="visibility:hidden">
+              <div class="business-card-bg" style="background-image:url('http://www.jeffdonovan.net/photos/xlg/JED-2006-0177.jpg')"></div>
+              <div class="business-card-overlay"></div>
+              <div class="business-card-content">
+                <div class="business-card-top">
+                  <h3 class="business-card-name">Jeffrey Donovan</h3>
+                  <p class="business-card-subtitle">Travel &amp; Cultural Photography</p>
+                </div>
+                <div class="business-card-bottom">
+                  <div class="business-card-social">
+                    <a href="mailto:jeffdonovan@jeffdonovan.net" title="Email" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(242,236,224,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                    <a href="#" title="Instagram" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="ig-g2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(240,148,51,0.75)"/><stop offset="100%" stop-color="rgba(188,24,136,0.75)"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-g2)"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-g2)"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-g2)"/></svg>
+                    </a>
+                    <a href="#" title="Facebook" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(100,160,242,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                  </div>
+                  <a href="mailto:jeffdonovan@jeffdonovan.net" class="business-card-email" onclick="event.stopPropagation()">jeffdonovan@jeffdonovan.net</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Face 3: JED-2003-0014-001 -->
+            <div class="card-face" id="card-face-2" style="visibility:hidden">
+              <div class="business-card-bg" style="background-image:url('http://www.jeffdonovan.net/photos/xlg/JED-2003-0014-001.jpg')"></div>
+              <div class="business-card-overlay"></div>
+              <div class="business-card-content">
+                <div class="business-card-top">
+                  <h3 class="business-card-name">Jeffrey Donovan</h3>
+                  <p class="business-card-subtitle">Travel &amp; Cultural Photography</p>
+                </div>
+                <div class="business-card-bottom">
+                  <div class="business-card-social">
+                    <a href="mailto:jeffdonovan@jeffdonovan.net" title="Email" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(242,236,224,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                    <a href="#" title="Instagram" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="ig-g3" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(240,148,51,0.75)"/><stop offset="100%" stop-color="rgba(188,24,136,0.75)"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-g3)"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-g3)"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-g3)"/></svg>
+                    </a>
+                    <a href="#" title="Facebook" onclick="event.stopPropagation()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(100,160,242,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                  </div>
+                  <a href="mailto:jeffdonovan@jeffdonovan.net" class="business-card-email" onclick="event.stopPropagation()">jeffdonovan@jeffdonovan.net</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Face 4: Black background, centred info -->
+            <div class="card-face card-info-face" id="card-face-3" style="visibility:hidden">
+              <div class="card-info-content">
+                <div class="card-info-rule"></div>
+                <h3 class="card-info-name">Jeffrey Donovan</h3>
+                <p class="card-info-subtitle">Travel &amp; Cultural Photography</p>
+                <div class="card-info-divider"></div>
+                <a href="mailto:jeffdonovan@jeffdonovan.net" class="card-info-email" onclick="event.stopPropagation()">jeffdonovan@jeffdonovan.net</a>
+                <p class="card-info-web">www.jeffdonovan.net</p>
+                <p class="card-info-location">Philadelphia, PA &mdash; Available worldwide</p>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -247,6 +304,56 @@
       </div>
 
       </div><!-- end .contact-layout -->
+
+      <!-- Original contact details -->
+      <div class="contact-info-bar">
+        <div class="contact-detail">
+          <h3>Email</h3>
+          <a href="mailto:jeffdonovan@jeffdonovan.net">jeffdonovan@jeffdonovan.net</a>
+        </div>
+        <div class="contact-detail">
+          <h3>Based In</h3>
+          <p>Philadelphia, PA</p>
+          <p>Available for assignments worldwide</p>
+        </div>
+        <div class="contact-detail">
+          <h3>Follow My Work</h3>
+          <div class="social-links">
+            <a href="mailto:jeffdonovan@jeffdonovan.net" title="Email">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8a6030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </a>
+            <a href="#" title="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <defs>
+                  <linearGradient id="ig-grad-orig" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#f09433"/>
+                    <stop offset="25%" stop-color="#e6683c"/>
+                    <stop offset="50%" stop-color="#dc2743"/>
+                    <stop offset="75%" stop-color="#cc2366"/>
+                    <stop offset="100%" stop-color="#bc1888"/>
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-grad-orig)"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-grad-orig)"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-grad-orig)"/>
+              </svg>
+            </a>
+            <a href="#" title="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1877F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <h3>Response Time</h3>
+          <p>I typically respond within 24&ndash;48 hours</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -319,6 +426,54 @@
 
       }, 3000);
     });
+  </script>
+  <script>
+    // ── Business card 4-face carousel ──
+    (function () {
+      var card  = document.getElementById('business-card');
+      var inner = document.getElementById('card-inner');
+      var faces = [0,1,2,3].map(function(i){ return document.getElementById('card-face-'+i); });
+      var step = 0, cDeg = 0, busy = false;
+
+      // Position a face without animation, then show it
+      function placeFace(face, deg) {
+        face.style.transition = 'none';
+        face.style.transform  = 'rotateY(' + deg + 'deg)';
+        face.style.visibility = 'visible';
+        face.getBoundingClientRect(); // force reflow
+      }
+
+      // Initial state: face 0 at 0°, face 1 at 180° (hidden behind face 0)
+      placeFace(faces[0], 0);
+      placeFace(faces[1], 180);
+
+      card.addEventListener('click', function () {
+        if (busy) return;
+        busy = true;
+
+        var prevFace      = faces[step];
+        var nextStep      = (step + 1) % 4;
+        var afterNextStep = (step + 2) % 4;
+        var afterNextFace = faces[afterNextStep];
+
+        // Pre-position the face that will become the new "back" after this flip
+        var afterNextDeg = (360 - ((cDeg + 360) % 360)) % 360;
+        placeFace(afterNextFace, afterNextDeg);
+
+        // Rotate the inner drum
+        cDeg += 180;
+        inner.style.transition = '';
+        inner.style.transform  = 'rotateY(' + cDeg + 'deg)';
+
+        step = nextStep;
+
+        inner.addEventListener('transitionend', function handler() {
+          inner.removeEventListener('transitionend', handler);
+          prevFace.style.visibility = 'hidden';
+          busy = false;
+        });
+      });
+    })();
   </script>
 </body>
 </html>

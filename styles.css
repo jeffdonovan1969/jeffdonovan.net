@@ -570,6 +570,17 @@ header.scrolled .mobile-menu a:hover { color: white; }
   margin: 0 auto;
 }
 
+.contact-info-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  margin-top: 4rem;
+  border-top: 3px solid rgba(30,19,10,0.35);
+  padding-top: 2rem;
+}
+
 .contact-content > p {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 0.95rem;
@@ -583,7 +594,6 @@ header.scrolled .mobile-menu a:hover { color: white; }
 .contact-business-card {
   position: relative;
   border-radius: 12px;
-  overflow: hidden;
   border-left: 5px solid #1e130a;
   border-right: 5px solid #1e130a;
   border-top: 1px solid rgba(30,19,10,0.18);
@@ -594,21 +604,41 @@ header.scrolled .mobile-menu a:hover { color: white; }
     0 20px 40px rgba(30,19,10,0.18),
     0 40px 72px rgba(30,19,10,0.14),
     0 1px 0 rgba(255,255,255,0.5) inset;
-  display: flex;
-  align-items: stretch;
   aspect-ratio: 4 / 3;
+  perspective: 1200px;
+  cursor: pointer;
 }
 
+/* ── 3-D flip mechanism ── */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  align-items: stretch;
+}
+
+/* ── Photo faces ── */
 .business-card-bg {
   position: absolute;
   inset: 0;
-  background-image: url('http://www.jeffdonovan.net/photos/xlg/JED-2005-0062.jpg');
   background-size: cover;
   background-position: center 25%;
   transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.contact-business-card:hover .business-card-bg {
+.card-face:hover .business-card-bg {
   transform: scale(1.04);
 }
 
@@ -633,6 +663,82 @@ header.scrolled .mobile-menu a:hover { color: white; }
   flex-direction: column;
   justify-content: space-between;
 }
+
+/* ── Info face (face 4) ── */
+.card-face.card-info-face {
+  background: #0a0502;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.55rem;
+  padding: 2.5rem;
+  width: 100%;
+}
+
+.card-info-rule {
+  width: 2.5rem;
+  height: 2px;
+  background-color: #8a6030;
+  margin-bottom: 0.5rem;
+}
+
+.card-info-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.14em;
+  color: #f2ece0;
+  line-height: 1.1;
+}
+
+.card-info-subtitle {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(242, 236, 224, 0.5);
+}
+
+.card-info-divider {
+  width: 60px;
+  height: 1px;
+  background-color: rgba(242, 236, 224, 0.2);
+  margin: 0.4rem 0;
+}
+
+.card-info-email {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(242, 236, 224, 0.85);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.card-info-email:hover { color: #f2ece0; }
+
+.card-info-web {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: rgba(242, 236, 224, 0.45);
+}
+
+.card-info-location {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: rgba(242, 236, 224, 0.3);
+}
+
 
 .business-card-top {}
 
@@ -896,6 +1002,10 @@ header.scrolled .mobile-menu a:hover { color: white; }
 .social-links a:hover {
   opacity: 1;
   transform: translateY(-3px);
+}
+
+.social-links a svg {
+  display: block;
 }
 
 /* ── Footer ── */
