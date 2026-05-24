@@ -299,12 +299,12 @@ function toggleReadMore() {
     
     content.classList.remove('open');
     btn.classList.remove('open');
-    btn.textContent = '→ Read More';
+    btn.innerHTML = '<span class="btn-arrow">→</span> Read More';
   } else {
     // Opening
     content.classList.add('open');
     btn.classList.add('open');
-    btn.textContent = '↓ Description';
+    btn.innerHTML = '<span class="btn-arrow">↓</span> Description';
   }
 }
 

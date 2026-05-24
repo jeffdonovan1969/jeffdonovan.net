@@ -236,44 +236,51 @@ header.scrolled .mobile-menu.active {
 
 .modal-close {
   position: absolute;
-  top: 1.25rem;
-  right: 1.75rem;
+  top: 1rem;
+  right: 1rem;
   color: #2a1e12;
-  font-size: 1.75rem;
-  font-weight: 400;
+  font-size: 2rem;
+  font-weight: 300;
   cursor: pointer;
-  z-index: 2002;
-  transition: opacity 0.2s;
+  z-index: 10;
+  opacity: 0.6;
+  transition: opacity 0.3s;
   line-height: 1;
-  opacity: 0.45;
+  /* large touch target */
+  padding: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-close:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 
-/* Navigation zones */
-.modal-nav-zone {
+/* Desktop navigation arrow buttons */
+.modal-nav-btn {
   position: absolute;
-  top: 0;
-  width: 20%;
-  height: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2002;
+  background: none;
+  border: none;
+  color: #2a1e12;
+  font-size: 1.5rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  z-index: 2001;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 1rem;
+  opacity: 0.6;
+  transition: opacity 0.3s;
 }
-
-.modal-nav-zone svg {
-  display: none;
+.modal-nav-btn:hover {
+  opacity: 1;
 }
-
-.modal-nav-zone:hover {
-  background-color: rgba(0, 0, 0, 0.07);
-}
-
-.modal-nav-zone-prev { left: 0; }
-.modal-nav-zone-next { right: 0; }
+.modal-nav-prev { left: 0.5rem; }
+.modal-nav-next { right: 0.5rem; }
 
 /* Scene container — full viewport, transparent, lays frame + label side-by-side */
 .modal-content {
@@ -337,7 +344,7 @@ header.scrolled .mobile-menu.active {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: left;
   /* Thin dark border with left accent bar */
   border-left: 5px solid #1e130a;
@@ -466,7 +473,8 @@ header.scrolled .mobile-menu.active {
     gap: 1.5rem;             /* more breathing room between image and label card */
     width: 100vw;
     height: 100vh;
-    padding: 3rem 1.5rem 1.5rem; /* more inset from all edges of the window */
+    /* top padding must clear close button; max() picks the larger of fixed vs safe-area-based value */
+    padding: max(7rem, calc(env(safe-area-inset-top, 0px) + 4rem)) 1.5rem 1.5rem;
   }
 
   .modal-image-panel {
@@ -513,9 +521,14 @@ header.scrolled .mobile-menu.active {
   }
 
   .modal-close {
-    top: 0.6rem;
-    right: 0.75rem;
-    font-size: 1.5rem;
+    top: max(3rem, calc(env(safe-area-inset-top, 0px) + 0.75rem));
+    right: calc(env(safe-area-inset-right, 0px) + 0.75rem);
+    font-size: 1.8rem;
+  }
+
+  /* Hide desktop arrows on mobile — swipe handles navigation */
+  .modal-nav-btn {
+    display: none;
   }
 }
 
@@ -541,7 +554,7 @@ header.scrolled .mobile-menu.active {
 
 /* ── Read More / Full Description — gallery wall placard ── */
 .read-more-container {
-  max-width: 720px;
+  width: 80%;
   margin: 0 auto 4rem;
   text-align: center;
   position: relative;
@@ -563,11 +576,17 @@ header.scrolled .mobile-menu.active {
   cursor: pointer;
   transition: opacity 0.3s;
   text-decoration: none;
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
 .read-more-btn:hover {
   opacity: 1;
+}
+
+.read-more-btn .btn-arrow {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  opacity: 1; /* parent button handles opacity */
 }
 
 /* Animated expand panel */

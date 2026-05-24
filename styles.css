@@ -215,6 +215,8 @@ header.scrolled .mobile-menu a:hover { color: white; }
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: opacity 0.8s ease-in-out;
+  will-change: opacity;
 }
 
 .hero::before {
@@ -308,6 +310,7 @@ header.scrolled .mobile-menu a:hover { color: white; }
 
 /* ── Portfolio section ── */
 .portfolio {
+  scroll-margin-top: 4rem;
   padding: 5rem 1.5rem 6rem;
   position: relative;
 }
@@ -356,6 +359,24 @@ header.scrolled .mobile-menu a:hover { color: white; }
   letter-spacing: 0.02em;
   text-align: center;
   width: 100%;
+}
+
+/* Quote rotator — all quotes share the same grid cell so the container
+   is always as tall as the longest quote; no JS height measurement needed */
+.about-quote .quote-rotator {
+  display: grid;
+  width: 100%;
+}
+
+.about-quote .quote-rotator p {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  margin: 0;
+}
+
+.about-quote .quote-rotator p.active {
+  opacity: 1;
 }
 
 /* No ::before quote mark */
@@ -498,8 +519,62 @@ header.scrolled .mobile-menu a:hover { color: white; }
 
 .category-link:hover { opacity: 1; }
 
+/* ── Image strip between portfolio and about ── */
+.image-strip {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: #1a0f05;
+  padding: 14px 0;
+}
+
+/* Sprocket holes rendered as a tiling SVG pattern on top/bottom edges */
+.image-strip::before,
+.image-strip::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 14px;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='14'%3E%3Crect width='22' height='14' fill='%231a0f05'/%3E%3Crect x='5' y='2' width='12' height='10' rx='2' fill='%23ede4d3'/%3E%3C/svg%3E");
+  background-size: 22px 14px;
+}
+
+.image-strip::before { top: 0; }
+.image-strip::after  { bottom: 0; }
+
+.image-strip-track {
+  display: flex;
+  height: 40px;
+  animation: strip-scroll-right 40s linear infinite;
+}
+
+.image-strip-track img {
+  height: 40px;
+  width: auto;
+  flex-shrink: 0;
+  display: block;
+}
+
+@keyframes strip-scroll-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes strip-scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.image-strip--reverse .image-strip-track {
+  animation-name: strip-scroll-left;
+}
+
 /* ── About section ── */
 .about {
+  scroll-margin-top: 4rem;
   padding: 5rem 1.5rem 6rem;
   position: relative;
 }
@@ -559,8 +634,19 @@ header.scrolled .mobile-menu a:hover { color: white; }
 
 .about-text p:last-child { margin-bottom: 0; }
 
+.about-signature {
+  display: block;
+  height: 80px;
+  width: auto;
+  margin-top: 1.5rem;
+  margin-left: auto;
+  filter: invert(1);
+  opacity: 0.75;
+}
+
 /* ── Contact section ── */
 .contact {
+  scroll-margin-top: 4rem;
   padding: 5rem 1.5rem 6rem;
   position: relative;
 }
@@ -616,6 +702,7 @@ header.scrolled .mobile-menu a:hover { color: white; }
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+  will-change: transform;
 }
 
 .card-face {
@@ -677,7 +764,7 @@ header.scrolled .mobile-menu a:hover { color: white; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 0.55rem;
+  gap: 1rem;
   padding: 2.5rem;
   width: 100%;
 }
@@ -686,7 +773,6 @@ header.scrolled .mobile-menu a:hover { color: white; }
   width: 2.5rem;
   height: 2px;
   background-color: #8a6030;
-  margin-bottom: 0.5rem;
 }
 
 .card-info-name {
@@ -695,7 +781,7 @@ header.scrolled .mobile-menu a:hover { color: white; }
   font-weight: 300;
   font-style: italic;
   letter-spacing: 0.14em;
-  color: #f2ece0;
+  color: #e8b84b;
   line-height: 1.1;
 }
 
@@ -704,40 +790,54 @@ header.scrolled .mobile-menu a:hover { color: white; }
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(242, 236, 224, 0.5);
+  color: rgba(220, 168, 80, 0.75);
 }
 
 .card-info-divider {
   width: 60px;
   height: 1px;
-  background-color: rgba(242, 236, 224, 0.2);
-  margin: 0.4rem 0;
+  background-color: rgba(220, 168, 80, 0.4);
 }
 
 .card-info-email {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 0.95rem;
   font-style: italic;
-  color: rgba(242, 236, 224, 0.85);
+  color: #d4944a;
   text-decoration: none;
   transition: color 0.3s;
 }
 
-.card-info-email:hover { color: #f2ece0; }
+.card-info-email:hover { color: #e8b84b; }
 
 .card-info-web {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 0.82rem;
   letter-spacing: 0.08em;
-  color: rgba(242, 236, 224, 0.45);
+  color: rgba(212, 148, 74, 0.7);
 }
 
 .card-info-location {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 0.75rem;
   font-style: italic;
-  color: rgba(242, 236, 224, 0.3);
+  color: rgba(212, 148, 74, 0.55);
 }
+
+/* ── Info face white variant ── */
+.card-face.card-info-face-white {
+  background: #f5f0e8;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-info-face-white .card-info-name     { color: #8a4018; }
+.card-info-face-white .card-info-subtitle { color: rgba(138, 64, 24, 0.7); }
+.card-info-face-white .card-info-divider  { background-color: rgba(138, 64, 24, 0.3); }
+.card-info-face-white .card-info-email    { color: #7a3010; }
+.card-info-face-white .card-info-email:hover { color: #5a2008; }
+.card-info-face-white .card-info-web      { color: rgba(122, 48, 16, 0.65); }
+.card-info-face-white .card-info-location { color: rgba(122, 48, 16, 0.5); }
 
 
 .business-card-top {}
@@ -925,9 +1025,9 @@ header.scrolled .mobile-menu a:hover { color: white; }
 .contact-submit-btn {
   align-self: center;
   padding: 0.75rem 2.5rem;
-  background: transparent;
-  color: #1e140a;
-  border: 1px solid rgba(30,19,10,0.5);
+  background: #1e130a;
+  color: #f2ece0;
+  border: 1px solid #1e130a;
   border-radius: 0;
   font-size: 0.75rem;
   font-family: Georgia, 'Times New Roman', serif;
@@ -938,8 +1038,8 @@ header.scrolled .mobile-menu a:hover { color: white; }
 }
 
 .contact-submit-btn:hover:not(:disabled) {
-  background: rgba(30,19,10,0.08);
-  border-color: #1e130a;
+  background: #3a2510;
+  border-color: #3a2510;
   transform: translateY(-2px);
 }
 
@@ -1077,6 +1177,28 @@ footer {
 
 
   .hero { background-attachment: scroll !important; }
+
+  .card-info-content {
+    gap: 0.4rem;
+    padding: 1.25rem;
+  }
+
+  .card-info-name {
+    font-size: 2rem;
+  }
+
+  .card-info-subtitle {
+    font-size: 0.62rem;
+  }
+
+  .card-info-email {
+    font-size: 0.8rem;
+  }
+
+  .card-info-web,
+  .card-info-location {
+    font-size: 0.68rem;
+  }
 }
 
 @media (max-width: 480px) {

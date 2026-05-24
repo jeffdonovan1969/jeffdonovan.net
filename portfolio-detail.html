@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Portfolio Detail - Jeff Donovan Photography</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -54,7 +54,7 @@
       <!-- Expanding Full Description -->
       <div class="read-more-container" id="read-more-container" style="display:none;">
         <button class="read-more-btn" id="read-more-btn" onclick="toggleReadMore()">
-          → Read More
+          <span class="btn-arrow">→</span> Read More
         </button>
         <div class="read-more-content" id="read-more-content">
           <div class="read-more-inner">
@@ -78,21 +78,12 @@
 
   <!-- Image Modal -->
   <div id="image-modal" class="image-modal" onclick="closeModal()">
-    <span class="modal-close">&times;</span>
-    
-    <!-- Navigation zones covering left and right thirds -->
-    <div class="modal-nav-zone modal-nav-zone-prev" onclick="event.stopPropagation(); navigateImage(-1)">
-      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </div>
-    <div class="modal-nav-zone modal-nav-zone-next" onclick="event.stopPropagation(); navigateImage(1)">
-      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </div>
-    
+    <!-- Desktop navigation arrows -->
+    <button class="modal-nav-btn modal-nav-prev" onclick="event.stopPropagation(); navigateImage(-1)">&#8592;</button>
+    <button class="modal-nav-btn modal-nav-next" onclick="event.stopPropagation(); navigateImage(1)">&#8594;</button>
+
     <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
       <div class="modal-image-panel">
         <img id="modal-image" src="" alt="">
       </div>
@@ -169,39 +160,50 @@
     }
     
     // Modal functions
+    function adjustInfoAlignment() {
+      const info = document.getElementById('modal-info');
+      if (!info) return;
+      void info.offsetHeight; // force layout flush so scrollHeight is accurate
+      info.style.justifyContent = info.scrollHeight > info.clientHeight ? 'flex-start' : 'center';
+    }
+
     function openModal(image, index) {
       currentImageIndex = index;
       updateModalContent();
       const modal = document.getElementById('image-modal');
       modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-      
-      // Initialize swipe functionality
+      adjustInfoAlignment(); // called after display:flex so layout is computed
       initializeSwipe();
     }
-    
+
     function updateModalContent() {
       if (!currentPortfolio || !currentPortfolio.images[currentImageIndex]) return;
-      
+
       const image = currentPortfolio.images[currentImageIndex];
       document.getElementById('modal-image').src = 'http://www.jeffdonovan.net' + image.large_file;
       document.getElementById('modal-title').textContent = image.name || '';
       document.getElementById('modal-teaser').textContent = (image.location ? image.location + ', ' + image.date : '');
       document.getElementById('modal-detail').textContent = image.text || '';
+
+      const modal = document.getElementById('image-modal');
+      if (modal.style.display === 'flex') {
+        adjustInfoAlignment(); // only when modal is already visible (e.g. navigating)
+      }
     }
-    
+
     function navigateImage(direction) {
       if (!currentPortfolio) return;
-      
+
       currentImageIndex += direction;
-      
+
       // Wrap around if at the beginning or end
       if (currentImageIndex < 0) {
         currentImageIndex = currentPortfolio.images.length - 1;
       } else if (currentImageIndex >= currentPortfolio.images.length) {
         currentImageIndex = 0;
       }
-      
+
       updateModalContent();
     }
     

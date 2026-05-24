@@ -60,7 +60,7 @@ function initHeroSlideshow() {
       currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
       hero.style.backgroundImage = `url('${heroImages[currentHeroIndex]}')`;
       hero.style.opacity = '1';
-    }, 400);
+    }, 800);
   }, 6000);
 }
 
